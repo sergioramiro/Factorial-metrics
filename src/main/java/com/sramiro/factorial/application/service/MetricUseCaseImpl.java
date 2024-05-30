@@ -8,9 +8,11 @@ import com.sramiro.factorial.domain.model.Metric;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class MetricService implements MetricUseCase {
+public class MetricUseCaseImpl implements MetricUseCase {
 
     private final MetricRepository metricRepository;
 
@@ -19,5 +21,13 @@ public class MetricService implements MetricUseCase {
         Metric save = metricRepository.save(MetricMapper.dtoToMetric(metricDTO));
 
         return MetricMapper.metricToDto(save);
+    }
+
+    @Override
+    public List<MetricDTO> getMetrics() {
+        List<Metric> metrics = metricRepository.findAll();
+        return metrics.stream()
+                .map(metric -> MetricDTO.builder().name(metric.getName()).value(metric.getValue()).timestamp(metric.getTimestamp()).build())
+                .toList();
     }
 }
