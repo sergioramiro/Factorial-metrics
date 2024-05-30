@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface MetricUseCase {
     MetricDTO createMetric(MetricDTO metricDTO);
+
     List<MetricDTO> getMetrics();
 }
