@@ -23,6 +23,10 @@ public class MetricService implements MetricUseCase {
                         .value(metricDTO.getValue())
                         .build());
 
-        return new MetricDTO(save.getTimestamp(), save.getName(), save.getValue());
+        return MetricDTO.builder()
+                .value(save.getValue())
+                .timestamp(save.getTimestamp())
+                .name(save.getName())
+                .build();
     }
 }
