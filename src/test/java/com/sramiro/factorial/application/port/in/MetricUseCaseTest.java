@@ -22,6 +22,8 @@ import static org.mockito.Mockito.when;
 @RequiredArgsConstructor
 class MetricUseCaseTest {
 
+    public static final String METRIC = "metric";
+
     @Mock
     private MetricRepository metricRepository;
 
@@ -31,14 +33,9 @@ class MetricUseCaseTest {
     @Test
     void saveMetric_ShouldReturnValidMetricDTO() {
         // Given
-        MetricDTO metricDTO = new MetricDTO(LocalDateTime.now(), "metric", 10.0);
-        Metric savedMetric = Metric.builder()
-                .id(1L)
-                .timestamp(metricDTO.getTimestamp())
-                .name(metricDTO.getName())
-                .value(metricDTO.getValue())
-                .build();
-        when(metricRepository.save(any(Metric.class))).thenReturn(savedMetric);
+        MetricDTO metricDTO = getMetricDTO(METRIC, 10.0, LocalDateTime.now());
+
+        when(metricRepository.save(any(Metric.class))).thenReturn(fromDTO(metricDTO));
 
         // When
         MetricDTO result = metricService.saveMetric(metricDTO);
@@ -52,15 +49,9 @@ class MetricUseCaseTest {
     @Test
     void saveMetric_ShouldSaveMetricAndReturnDTO() {
         // Given
-        MetricDTO metricDTO = new MetricDTO(LocalDateTime.now(), "metric2", 5.0);
-        Metric savedMetric = Metric.builder()
-                .id(1L)
-                .timestamp(metricDTO.getTimestamp())
-                .name(metricDTO.getName())
-                .value(metricDTO.getValue())
-                .build();
+        MetricDTO metricDTO = getMetricDTO(METRIC, 5.0, LocalDateTime.now());
 
-        when(metricRepository.save(any(Metric.class))).thenReturn(savedMetric);
+        when(metricRepository.save(any(Metric.class))).thenReturn(fromDTO(metricDTO));
 
         // When
         MetricDTO result = metricService.saveMetric(metricDTO);
@@ -72,5 +63,22 @@ class MetricUseCaseTest {
 
         verify(metricRepository, times(1)).save(any(Metric.class));
 
+    }
+
+    private static Metric fromDTO(MetricDTO metricDTO) {
+        return Metric.builder()
+                .id(1L)
+                .timestamp(metricDTO.getTimestamp())
+                .name(metricDTO.getName())
+                .value(metricDTO.getValue())
+                .build();
+    }
+
+    private static MetricDTO getMetricDTO(String name, double value, LocalDateTime timestamp) {
+        return MetricDTO.builder()
+                .name(name)
+                .value(value)
+                .timestamp(timestamp)
+                .build();
     }
 }
