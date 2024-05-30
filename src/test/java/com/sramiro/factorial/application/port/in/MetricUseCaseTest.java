@@ -3,12 +3,14 @@ package com.sramiro.factorial.application.port.in;
 import com.sramiro.factorial.application.dto.MetricDTO;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.MetricService;
+import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.domain.model.Metric;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.time.LocalDateTime;
 
