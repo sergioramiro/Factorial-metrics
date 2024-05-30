@@ -14,9 +14,8 @@ public class MetricService implements MetricUseCase {
 
     private final MetricRepository metricRepository;
 
-
     @Override
-    public MetricDTO saveMetric(MetricDTO metricDTO) {
+    public MetricDTO createMetric(MetricDTO metricDTO) {
         Metric save = metricRepository.save(MetricMapper.dtoToMetric(metricDTO));
 
         return MetricMapper.metricToDto(save);
