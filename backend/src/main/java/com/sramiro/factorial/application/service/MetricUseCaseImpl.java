@@ -2,6 +2,7 @@ package com.sramiro.factorial.application.service;
 
 import com.sramiro.factorial.application.dto.MetricDTO;
 import com.sramiro.factorial.application.port.in.MetricUseCase;
+import com.sramiro.factorial.application.port.out.Interval;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.domain.model.Metric;
@@ -24,9 +25,17 @@ public class MetricUseCaseImpl implements MetricUseCase {
     }
 
     @Override
-    public List<MetricDTO> getMetrics() {
+    public List<MetricDTO> getAllMetrics() {
         List<Metric> metrics = metricRepository.findAll();
         return metrics.stream()
+                .map(metric -> MetricDTO.builder().name(metric.getName()).value(metric.getValue()).timestamp(metric.getTimestamp()).build())
+                .toList();
+    }
+
+    @Override
+    public List<MetricDTO> getAverageMetricsByInterval(String interval) {
+        List<Metric> averageMetricsByInterval = metricRepository.getAverageMetricsByInterval(interval);
+        return averageMetricsByInterval.stream()
                 .map(metric -> MetricDTO.builder().name(metric.getName()).value(metric.getValue()).timestamp(metric.getTimestamp()).build())
                 .toList();
     }

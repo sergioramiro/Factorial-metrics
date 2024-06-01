@@ -1,6 +1,7 @@
 package com.sramiro.factorial.application.port.in;
 
 import com.sramiro.factorial.application.dto.MetricDTO;
+import com.sramiro.factorial.application.port.out.Interval;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.MetricUseCaseImpl;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
@@ -80,12 +81,40 @@ class MetricUseCaseTest {
         when(metricRepository.findAll()).thenReturn(metrics);
 
         // When
-        List<MetricDTO> result = metricUseCase.getMetrics();
+        List<MetricDTO> result = metricUseCase.getAllMetrics();
 
         // Then
         assertNotNull(result);
         assertEquals(metrics.size(), result.size());
         verify(metricRepository, times(1)).findAll();
+    }
+
+    @Test
+    void getAverageMetricsByInterval_ShouldCallRepositoryAndReturnListOfDTOs() {
+        // Given
+        List<Metric> metrics = new ArrayList<>();
+
+        LocalDateTime time = LocalDateTime.now();
+        metrics.add(Metric.builder().id(1L).name("metric1").value(10.0).timestamp(time).build());
+        metrics.add(Metric.builder().id(2L).name("metric2").value(15.0).timestamp(time).build());
+
+        when(metricRepository.getAverageMetricsByInterval(Interval.MINUTE.getInterval())).thenReturn(metrics);
+
+        // When
+        List<MetricDTO> result = metricUseCase.getAverageMetricsByInterval(Interval.MINUTE.getInterval());
+
+        // Then
+        assertEquals(2, result.size());
+        assertEquals(time, result.get(0).getTimestamp());
+        assertEquals("metric1", result.get(0).getName());
+        assertEquals(10.0, result.get(0).getValue());
+
+        assertEquals(time, result.get(1).getTimestamp());
+        assertEquals("metric2", result.get(1).getName());
+        assertEquals(15.0, result.get(1).getValue());
+
+        verify(metricRepository, times(1)).getAverageMetricsByInterval(Interval.MINUTE.getInterval());
+
     }
 
     private static MetricDTO getMetricDTO(String name, double value, LocalDateTime timestamp) {
