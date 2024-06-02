@@ -25,6 +25,7 @@ public class Metric {
     private LocalDateTime timestamp;
     @Column(nullable = false)
     private String name;
+    // TODO: Take a look at this and improve it.
     @Column(name = "\"value\"", nullable = false)
     private Double value;
 }

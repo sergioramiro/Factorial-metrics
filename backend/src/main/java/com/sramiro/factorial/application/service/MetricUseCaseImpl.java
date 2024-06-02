@@ -2,7 +2,6 @@ package com.sramiro.factorial.application.service;
 
 import com.sramiro.factorial.application.dto.MetricDTO;
 import com.sramiro.factorial.application.port.in.MetricUseCase;
-import com.sramiro.factorial.application.port.out.Interval;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.domain.model.Metric;

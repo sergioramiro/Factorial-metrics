@@ -2,7 +2,10 @@ package com.sramiro.factorial.application.service.mapper;
 
 import com.sramiro.factorial.application.dto.MetricDTO;
 import com.sramiro.factorial.domain.model.Metric;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MetricMapper {
     public static MetricDTO metricToDto(Metric metric) {
         return MetricDTO.builder()
