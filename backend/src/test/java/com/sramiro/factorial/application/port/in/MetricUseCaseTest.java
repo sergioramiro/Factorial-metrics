@@ -101,7 +101,7 @@ class MetricUseCaseTest {
         when(metricRepository.getAverageMetricsByInterval(Interval.MINUTE.getInterval())).thenReturn(metrics);
 
         // When
-        List<MetricDTO> result = metricUseCase.getAverageMetricsByInterval(Interval.MINUTE.getInterval());
+        List<MetricDTO> result = metricUseCase.getAverageMetricsByInterval(Interval.MINUTE);
 
         // Then
         assertEquals(2, result.size());
