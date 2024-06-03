@@ -16,12 +16,13 @@ import java.util.List;
 public class MetricUseCaseImpl implements MetricUseCase {
 
     private final MetricRepository metricRepository;
+    private final MetricMapper metricMapper;
 
     @Override
     public MetricDTO createMetric(MetricDTO metricDTO) {
-        Metric save = metricRepository.save(MetricMapper.dtoToMetric(metricDTO));
+        Metric save = metricRepository.save(metricMapper.toMetric(metricDTO));
 
-        return MetricMapper.metricToDto(save);
+        return metricMapper.toMetricDto(save);
     }
 
     @Override

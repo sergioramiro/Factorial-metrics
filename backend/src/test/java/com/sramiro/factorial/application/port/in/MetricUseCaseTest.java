@@ -5,11 +5,13 @@ import com.sramiro.factorial.application.port.out.Interval;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.MetricUseCaseImpl;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
+import com.sramiro.factorial.application.service.mapper.MetricMapperImpl;
 import com.sramiro.factorial.domain.model.Metric;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
@@ -35,12 +37,15 @@ class MetricUseCaseTest {
     @InjectMocks
     private MetricUseCaseImpl metricUseCase;
 
+    @Spy
+    private MetricMapper metricMapper = new MetricMapperImpl();
+
     @Test
     void CreateMetric_ShouldReturnValidMetricDTO() {
         // Given
         MetricDTO metricDTO = getMetricDTO(METRIC, 10.0, LocalDateTime.now());
 
-        when(metricRepository.save(any(Metric.class))).thenReturn(MetricMapper.dtoToMetric(metricDTO));
+        when(metricRepository.save(any(Metric.class))).thenReturn(new MetricMapperImpl().toMetric(metricDTO));
 
         // When
         MetricDTO result = metricUseCase.createMetric(metricDTO);
@@ -56,7 +61,7 @@ class MetricUseCaseTest {
         // Given
         MetricDTO metricDTO = getMetricDTO(METRIC, 5.0, LocalDateTime.now());
 
-        when(metricRepository.save(any(Metric.class))).thenReturn(MetricMapper.dtoToMetric(metricDTO));
+        when(metricRepository.save(any(Metric.class))).thenReturn(new MetricMapperImpl().toMetric(metricDTO));
 
         // When
         MetricDTO result = metricUseCase.createMetric(metricDTO);
