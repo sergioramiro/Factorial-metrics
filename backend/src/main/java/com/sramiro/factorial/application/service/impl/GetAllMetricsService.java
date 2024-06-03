@@ -1,0 +1,28 @@
+package com.sramiro.factorial.application.service.impl;
+
+import com.sramiro.factorial.application.dto.MetricDTO;
+import com.sramiro.factorial.application.port.in.getAllMetrics.GetAllMetricsUseCase;
+import com.sramiro.factorial.application.port.out.MetricRepository;
+import com.sramiro.factorial.application.service.mapper.MetricMapper;
+import com.sramiro.factorial.domain.model.Metric;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class GetAllMetricsService implements GetAllMetricsUseCase {
+
+    private final MetricRepository metricRepository;
+    private final MetricMapper metricMapper;
+
+    @Override
+    public List<MetricDTO> getAllMetrics() {
+        List<Metric> metrics = metricRepository.findAll();
+        return metrics.stream()
+                .map(metricMapper::toMetricDto)
+                .toList();
+    }
+
+}

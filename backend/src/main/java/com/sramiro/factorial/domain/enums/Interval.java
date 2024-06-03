@@ -1,4 +1,4 @@
-package com.sramiro.factorial.application.port.out;
+package com.sramiro.factorial.domain.enums;
 
 
 import lombok.Getter;
