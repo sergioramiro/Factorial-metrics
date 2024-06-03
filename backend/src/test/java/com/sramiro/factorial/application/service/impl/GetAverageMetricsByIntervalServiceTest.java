@@ -1,6 +1,7 @@
 package com.sramiro.factorial.application.service.impl;
 
 import com.sramiro.factorial.application.dto.MetricDTO;
+import com.sramiro.factorial.application.service.metrics.impl.GetAverageMetricsByIntervalService;
 import com.sramiro.factorial.domain.enums.Interval;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
@@ -50,7 +51,7 @@ class GetAverageMetricsByIntervalServiceTest {
         when(metricRepository.getAverageMetricsByInterval(Interval.MINUTE.getInterval())).thenReturn(metrics);
 
         // When
-        List<MetricDTO> result = service.getAverageMetricsByInterval(Interval.MINUTE);
+        List<Metric> result = service.getAverageMetricsByInterval(Interval.MINUTE);
 
         // Then
         assertEquals(2, result.size());

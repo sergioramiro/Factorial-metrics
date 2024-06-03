@@ -4,6 +4,7 @@ import com.sramiro.factorial.application.dto.MetricDTO;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.application.service.mapper.MetricMapperImpl;
+import com.sramiro.factorial.application.service.metrics.impl.CreateMetricService;
 import com.sramiro.factorial.domain.model.Metric;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -42,7 +43,7 @@ class CreateMetricServiceTest {
         when(metricRepository.save(any(Metric.class))).thenReturn(new MetricMapperImpl().toMetric(metricDTO));
 
         // When
-        MetricDTO result = service.createMetric(metricDTO);
+        Metric result = service.createMetric(metricDTO);
 
         // Then
         assertEquals(metricDTO.getTimestamp(), result.getTimestamp());
@@ -58,7 +59,7 @@ class CreateMetricServiceTest {
         when(metricRepository.save(any(Metric.class))).thenReturn(new MetricMapperImpl().toMetric(metricDTO));
 
         // When
-        MetricDTO result = service.createMetric(metricDTO);
+        Metric result = service.createMetric(metricDTO);
 
         // Then
         assertEquals(metricDTO.getTimestamp(), result.getTimestamp());

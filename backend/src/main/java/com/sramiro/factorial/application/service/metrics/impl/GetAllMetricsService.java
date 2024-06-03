@@ -1,7 +1,6 @@
-package com.sramiro.factorial.application.service.impl;
+package com.sramiro.factorial.application.service.metrics.impl;
 
-import com.sramiro.factorial.application.dto.MetricDTO;
-import com.sramiro.factorial.application.port.in.getAllMetrics.GetAllMetricsUseCase;
+import com.sramiro.factorial.application.port.in.metrics.GetAllMetricsUseCase;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.domain.model.Metric;
@@ -18,11 +17,8 @@ public class GetAllMetricsService implements GetAllMetricsUseCase {
     private final MetricMapper metricMapper;
 
     @Override
-    public List<MetricDTO> getAllMetrics() {
-        List<Metric> metrics = metricRepository.findAll();
-        return metrics.stream()
-                .map(metricMapper::toMetricDto)
-                .toList();
+    public List<Metric> getAllMetrics() {
+        return metricRepository.findAll();
     }
 
 }
