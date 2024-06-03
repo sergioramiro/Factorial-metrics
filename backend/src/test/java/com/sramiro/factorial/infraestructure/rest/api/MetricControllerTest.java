@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -52,5 +54,28 @@ class MetricControllerTest {
         assertEquals(15.0, response.getValue());
         assertEquals("name", response.getName());
         assertNotNull(response.getTimestamp());
+    }
+
+    @Test
+    void createPaymentMethod_ShouldCallCreateMetricUseCaseAndReturnValidMetricResponse() {
+
+        // Given
+        CreateMetricRequest request = CreateMetricRequest.builder().name("name").value(15.0).build();
+        Metric metric = Metric.builder().id(2L).name("name2").value(20.0).timestamp(LocalDateTime.now()).build();
+
+        when(createMetricUseCase.createMetric(any(MetricDTO.class))).thenReturn(metric);
+
+        // When
+        MetricResponse response = metricController.createPaymentMethod(request);
+
+        // Then
+        assertNotNull(response);
+        assertEquals(2L, response.getId());
+        assertEquals(20.0, response.getValue());
+        assertEquals("name2", response.getName());
+        assertNotNull(response.getTimestamp());
+
+        verify(createMetricUseCase, times(1)).createMetric(any(MetricDTO.class));
+
     }
 }
