@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface MetricRepository extends JpaRepository<Metric, Long> {
     // TODO: modify the query with correct one
-    @Query("SELECT AVG(m.value) FROM Metric m WHERE m.value = ?1")
+    @Query(nativeQuery = true, value = "SELECT DATE_TRUNC(?1, timestamp) AS periodo, AVG(m.value) AS valor_promedio FROM Metric m GROUP BY DATE_TRUNC('minute', timestamp) ORDER BY periodo")
     List<Metric> getAverageMetricsByInterval(String interval);
 }

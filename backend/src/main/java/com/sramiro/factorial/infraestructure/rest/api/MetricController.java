@@ -8,15 +8,17 @@ import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRe
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMapper;
 import com.sramiro.factorial.infraestructure.rest.spec.MetricControllerSpec;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class MetricController implements MetricControllerSpec {
-    private CreateMetricUseCase createMetricUseCase;
-    private GetAverageMetricsByIntervalUseCase getAverageMetricsByIntervalUseCase;
-    private MetricControllerMapper mapper;
+    private final CreateMetricUseCase createMetricUseCase;
+    private final GetAverageMetricsByIntervalUseCase getAverageMetricsByIntervalUseCase;
+    private final MetricControllerMapper mapper;
 
     @Override
     public MetricResponse createPaymentMethod(CreateMetricRequest request) {

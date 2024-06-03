@@ -15,6 +15,5 @@ public class CreateMetricRequest {
     private String name;
 
     @NotNull
-    @NotEmpty
     private Double value;
 }
