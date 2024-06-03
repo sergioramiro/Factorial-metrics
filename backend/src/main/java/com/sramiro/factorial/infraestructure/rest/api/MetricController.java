@@ -8,7 +8,6 @@ import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMap
 import com.sramiro.factorial.infraestructure.rest.spec.MetricControllerSpec;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

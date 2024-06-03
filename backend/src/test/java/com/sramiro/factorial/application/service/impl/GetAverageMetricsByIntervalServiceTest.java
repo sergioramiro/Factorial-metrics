@@ -1,11 +1,10 @@
 package com.sramiro.factorial.application.service.impl;
 
-import com.sramiro.factorial.application.dto.MetricDTO;
-import com.sramiro.factorial.application.service.metrics.impl.GetAverageMetricsByIntervalService;
-import com.sramiro.factorial.domain.enums.Interval;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.application.service.mapper.MetricMapperImpl;
+import com.sramiro.factorial.application.service.metrics.impl.GetAverageMetricsByIntervalService;
+import com.sramiro.factorial.domain.enums.Interval;
 import com.sramiro.factorial.domain.model.Metric;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
