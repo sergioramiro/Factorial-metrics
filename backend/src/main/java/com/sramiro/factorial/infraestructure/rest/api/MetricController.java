@@ -1,6 +1,8 @@
 package com.sramiro.factorial.infraestructure.rest.api;
 
 import com.sramiro.factorial.application.port.in.metrics.CreateMetricUseCase;
+import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByIntervalUseCase;
+import com.sramiro.factorial.domain.enums.Interval;
 import com.sramiro.factorial.domain.model.Metric;
 import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRequest;
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
@@ -13,6 +15,7 @@ import java.util.List;
 @RestController
 public class MetricController implements MetricControllerSpec {
     private CreateMetricUseCase createMetricUseCase;
+    private GetAverageMetricsByIntervalUseCase getAverageMetricsByIntervalUseCase;
     private MetricControllerMapper mapper;
 
     @Override
@@ -23,6 +26,7 @@ public class MetricController implements MetricControllerSpec {
 
     @Override
     public List<MetricResponse> getAverageMetricsByInterval(String interval) {
-        return List.of();
+        List<Metric> metrics = getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.valueOf(interval));
+        return mapper.toListOfMetricsResponse(metrics);
     }
 }

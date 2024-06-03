@@ -6,9 +6,13 @@ import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRe
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface MetricControllerMapper {
     MetricDTO toCreateMetricRequestDto(CreateMetricRequest request);
 
     MetricResponse toMetricResponse(Metric metric);
+
+    List<MetricResponse> toListOfMetricsResponse(List<Metric> metricList);
 }
