@@ -1,7 +1,7 @@
 package com.sramiro.factorial.application.port.out;
 
-import com.sramiro.factorial.domain.views.AverageMetricView;
 import com.sramiro.factorial.domain.model.Metric;
+import com.sramiro.factorial.domain.views.AverageMetricView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
