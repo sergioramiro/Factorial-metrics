@@ -19,4 +19,7 @@ public interface MetricRepository extends JpaRepository<Metric, Long> {
                         ORDER BY period
             """)
     List<AverageMetricView> getAverageMetricsByInterval(@Param("interval") String interval);
+
+    @Query("SELECT m.name FROM Metric m GROUP BY m.name")
+    List<String> getAllMetricNames();
 }

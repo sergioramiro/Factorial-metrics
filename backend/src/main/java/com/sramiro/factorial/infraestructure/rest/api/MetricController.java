@@ -31,6 +31,16 @@ public class MetricController implements MetricControllerSpec {
     @Override
     public List<AverageMetricResponse> getAverageMetricsByInterval(String interval) {
         List<AverageMetricView> metrics = getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.valueOf(interval.toUpperCase()));
+//        metrics.stream()
+//                .collect(Collectors.groupingBy(am -> am.getPeriod().format(DateTimeFormatter.ofPattern("MM-dd HH:mm"))))
+//                .entrySet().stream()
+//                .map(entry -> {
+//                    Map<String, Object> map = new LinkedHashMap<>();
+//                    map.put("time", entry.getKey());
+//                    entry.getValue().forEach(am -> map.put(am.getName(), am.getAverage()));
+//                    return map;
+//                })
+//                .collect(Collectors.toList());
         return mapper.toListOfAverageMetricsResponse(metrics);
     }
 }
