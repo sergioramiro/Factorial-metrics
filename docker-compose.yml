@@ -19,6 +19,16 @@ services:
     networks:
       - app-network
 
+  frontend:
+    build:
+      context: ./frontend 
+      dockerfile: Dockerfile  
+    container_name: frontend
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+
   postgres:
     image: postgres:latest
     container_name: postgres-db
