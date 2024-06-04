@@ -4,8 +4,11 @@ import com.sramiro.factorial.application.dto.MetricDTO;
 import com.sramiro.factorial.application.port.in.metrics.CreateMetricUseCase;
 import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByIntervalUseCase;
 import com.sramiro.factorial.domain.enums.Interval;
+import com.sramiro.factorial.domain.model.AverageMetric;
+import com.sramiro.factorial.domain.views.AverageMetricView;
 import com.sramiro.factorial.domain.model.Metric;
 import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRequest;
+import com.sramiro.factorial.infraestructure.rest.api.dto.response.AverageMetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMapper;
 import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMapperImpl;
@@ -92,24 +95,24 @@ class MetricControllerTest {
     @Test
     void getAverageMetricsByInterval_ShouldCallGetAverageMetricsByIntervalUseCaseAndReturnValidListMetricResponse() {
         LocalDateTime time = LocalDateTime.now();
-        Metric metric1 = Metric.builder().id(1L).name(NAME_1).value(11.5).timestamp(time).build();
-        Metric metric2 = Metric.builder().id(2L).name(NAME_2).value(22.5).timestamp(time.plusMinutes(1L)).build();
+        AverageMetric metric1 = AverageMetric.builder().name(NAME_1).average(11.5).period(time).build();
+        AverageMetric metric2 = AverageMetric.builder().name(NAME_2).average(22.5).period(time.plusMinutes(1L)).build();
         // Given
-        List<Metric> listMetrics = List.of(metric1, metric2);
+        List<AverageMetricView> listMetrics = List.of(metric1, metric2);
         when(getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.DAY)).thenReturn(listMetrics);
 
         // When
-        List<MetricResponse> response = metricController.getAverageMetricsByInterval(Interval.DAY.name());
+        List<AverageMetricResponse> response = metricController.getAverageMetricsByInterval(Interval.DAY.name());
 
         // Then
         assertNotNull(response);
         assertEquals(2, response.size());
-        assertEquals(1L, response.get(0).getId());
-        assertEquals(2L, response.get(1).getId());
+//        assertEquals(1L, response.get(0).getId());
+//        assertEquals(2L, response.get(1).getId());
         assertEquals(NAME_1, response.get(0).getName());
         assertEquals(NAME_2, response.get(1).getName());
-        assertEquals(time, response.get(0).getTimestamp());
-        assertEquals(time.plusMinutes(1L), response.get(1).getTimestamp());
+        assertEquals(time, response.get(0).getPeriod());
+        assertEquals(time.plusMinutes(1L), response.get(1).getPeriod());
 
         verify(getAverageMetricsByIntervalUseCase).getAverageMetricsByInterval(Interval.DAY);
 

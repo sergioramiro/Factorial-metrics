@@ -1,13 +1,22 @@
 package com.sramiro.factorial.application.port.out;
 
+import com.sramiro.factorial.domain.views.AverageMetricView;
 import com.sramiro.factorial.domain.model.Metric;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface MetricRepository extends JpaRepository<Metric, Long> {
-    // TODO: modify the query with correct one
-    @Query(nativeQuery = true, value = "SELECT DATE_TRUNC(?1, timestamp) AS periodo, AVG(m.value) AS valor_promedio FROM Metric m GROUP BY DATE_TRUNC('minute', timestamp) ORDER BY periodo")
-    List<Metric> getAverageMetricsByInterval(String interval);
+    @Query(nativeQuery = true, value = """
+                        SELECT COUNT(*)                         AS count,
+                               name                             AS name,
+                               DATE_TRUNC(:interval, timestamp) AS period,
+                               AVG(value)                       AS average
+                        FROM metric
+                        GROUP BY name, period
+                        ORDER BY period
+            """)
+    List<AverageMetricView> getAverageMetricsByInterval(@Param("interval") String interval);
 }

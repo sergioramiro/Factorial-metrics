@@ -5,6 +5,8 @@ import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.application.service.mapper.MetricMapperImpl;
 import com.sramiro.factorial.application.service.metrics.impl.GetAverageMetricsByIntervalService;
 import com.sramiro.factorial.domain.enums.Interval;
+import com.sramiro.factorial.domain.model.AverageMetric;
+import com.sramiro.factorial.domain.views.AverageMetricView;
 import com.sramiro.factorial.domain.model.Metric;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
@@ -44,23 +46,24 @@ class GetAverageMetricsByIntervalServiceTest {
         List<Metric> metrics = new ArrayList<>();
 
         LocalDateTime time = LocalDateTime.now();
-        metrics.add(Metric.builder().id(1L).name("metric1").value(10.0).timestamp(time).build());
-        metrics.add(Metric.builder().id(2L).name("metric2").value(15.0).timestamp(time).build());
+        AverageMetric metric1 = AverageMetric.builder().name("NAME_1").average(11.5).period(time).build();
+        AverageMetric metric2 = AverageMetric.builder().name("NAME_2").average(22.5).period(time.plusMinutes(1L)).build();
 
-        when(metricRepository.getAverageMetricsByInterval(Interval.MINUTE.getInterval())).thenReturn(metrics);
+        List<AverageMetricView> listMetrics = List.of(metric1, metric2);
+        when(metricRepository.getAverageMetricsByInterval(Interval.MINUTE.getInterval())).thenReturn(listMetrics);
 
         // When
-        List<Metric> result = service.getAverageMetricsByInterval(Interval.MINUTE);
+        List<AverageMetricView> result = service.getAverageMetricsByInterval(Interval.MINUTE);
 
         // Then
         assertEquals(2, result.size());
-        assertEquals(time, result.get(0).getTimestamp());
-        assertEquals("metric1", result.get(0).getName());
-        assertEquals(10.0, result.get(0).getValue());
+        assertEquals(time, result.get(0).getPeriod());
+        assertEquals("NAME_1", result.get(0).getName());
+        assertEquals(11.5, result.get(0).getAverage());
 
-        assertEquals(time, result.get(1).getTimestamp());
-        assertEquals("metric2", result.get(1).getName());
-        assertEquals(15.0, result.get(1).getValue());
+        assertEquals(time.plusMinutes(1L), result.get(1).getPeriod());
+        assertEquals("NAME_2", result.get(1).getName());
+        assertEquals(22.5, result.get(1).getAverage());
 
         verify(metricRepository, times(1)).getAverageMetricsByInterval(Interval.MINUTE.getInterval());
 

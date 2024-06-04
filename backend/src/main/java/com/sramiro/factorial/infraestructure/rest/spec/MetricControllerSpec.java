@@ -1,6 +1,7 @@
 package com.sramiro.factorial.infraestructure.rest.spec;
 
 import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRequest;
+import com.sramiro.factorial.infraestructure.rest.api.dto.response.AverageMetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -21,9 +22,9 @@ public interface MetricControllerSpec {
     @ResponseStatus(HttpStatus.CREATED)
     MetricResponse createPaymentMethod(@Valid @RequestBody CreateMetricRequest createMetricRequest);
 
-    @GetMapping("/metrics/average")
+    @GetMapping("/average")
     @ResponseStatus(HttpStatus.OK)
-    List<MetricResponse> getAverageMetricsByInterval(
+    List<AverageMetricResponse> getAverageMetricsByInterval(
             @RequestParam(value = "interval", required = true)
             @Pattern(regexp = "^(minute|hour|day)$", message = "Interval must be 'minute', 'hour', or 'day'")
             String interval

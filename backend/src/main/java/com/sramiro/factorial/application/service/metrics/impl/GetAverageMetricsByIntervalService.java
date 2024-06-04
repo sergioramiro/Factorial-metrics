@@ -4,7 +4,7 @@ import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByInte
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.application.service.mapper.MetricMapper;
 import com.sramiro.factorial.domain.enums.Interval;
-import com.sramiro.factorial.domain.model.Metric;
+import com.sramiro.factorial.domain.views.AverageMetricView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class GetAverageMetricsByIntervalService implements GetAverageMetricsByIn
 
 
     @Override
-    public List<Metric> getAverageMetricsByInterval(Interval interval) {
+    public List<AverageMetricView> getAverageMetricsByInterval(Interval interval) {
         return metricRepository.getAverageMetricsByInterval(interval.getInterval());
     }
 }
