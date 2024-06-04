@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
@@ -31,7 +32,7 @@ class GetAllMetricNamesServiceTest {
     private MetricMapper metricMapper = new MetricMapperImpl();
 
     @Test
-    public void getAllMetricNames_EmptyDatabaseShouldReturnEmptyList() {
+    void getAllMetricNames_EmptyDatabaseShouldReturnEmptyList() {
         // Given
         when(metricRepository.getAllMetricNames()).thenReturn(new ArrayList<>());
 
@@ -41,5 +42,19 @@ class GetAllMetricNamesServiceTest {
         // Then
         assertNotNull(result);
         assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void getAllMetricNames_SingleMetricNameShouldReturnSingleMetricName() {
+        // Given
+        when(metricRepository.getAllMetricNames()).thenReturn(List.of("name"));
+
+        // When
+        List<String> result = service.getAllMetricNames();
+
+        // Then
+        assertNotNull(result);
+        assertEquals(1, result.size());
+        assertEquals("name", result.get(0));
     }
 }

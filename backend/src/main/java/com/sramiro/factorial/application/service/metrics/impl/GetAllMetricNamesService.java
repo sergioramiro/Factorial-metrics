@@ -17,6 +17,6 @@ public class GetAllMetricNamesService implements GetAllMetricNamesUseCase {
 
     @Override
     public List<String> getAllMetricNames() {
-        return List.of();
+        return metricRepository.getAllMetricNames();
     }
 }
