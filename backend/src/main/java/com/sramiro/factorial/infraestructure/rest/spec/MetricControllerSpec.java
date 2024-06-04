@@ -30,4 +30,7 @@ public interface MetricControllerSpec {
             String interval
     );
 
+    @GetMapping("/names")
+    @ResponseStatus(HttpStatus.OK)
+    List<String> getAllMetricNames();
 }
