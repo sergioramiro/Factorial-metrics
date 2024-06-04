@@ -57,4 +57,20 @@ class GetAllMetricNamesServiceTest {
         assertEquals(1, result.size());
         assertEquals("name", result.get(0));
     }
+
+    @Test
+    void getAllMetricNames_MultipleMetricNamesShouldReturnMultipleMetricNames() {
+        // Given
+        when(metricRepository.getAllMetricNames()).thenReturn(List.of("name1", "name2", "name3"));
+
+        // When
+        List<String> metricNames = service.getAllMetricNames();
+
+        // Then
+        assertNotNull(metricNames);
+        assertEquals(3, metricNames.size());
+        assertTrue(metricNames.contains("name1"));
+        assertTrue(metricNames.contains("name2"));
+        assertTrue(metricNames.contains("name3"));
+    }
 }
