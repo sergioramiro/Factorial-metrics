@@ -50,7 +50,7 @@ class MetricControllerTest {
 
 
     @Test
-    void createPaymentMethod_ShouldReturnValidMetricResponse() {
+    void createMetric_ShouldReturnValidMetricResponse() {
 
         // Given
         CreateMetricRequest request = CreateMetricRequest.builder().name(NAME).value(15.0).build();
@@ -59,7 +59,7 @@ class MetricControllerTest {
         when(createMetricUseCase.createMetric(any(MetricDTO.class))).thenReturn(metric);
 
         // When
-        MetricResponse response = metricController.createPaymentMethod(request);
+        MetricResponse response = metricController.createMetric(request);
 
         // Then
         assertNotNull(response);
@@ -70,7 +70,7 @@ class MetricControllerTest {
     }
 
     @Test
-    void createPaymentMethod_ShouldCallCreateMetricUseCaseAndReturnValidMetricResponse() {
+    void createMetric_ShouldCallCreateMetricUseCaseAndReturnValidMetricResponse() {
 
         // Given
         CreateMetricRequest request = CreateMetricRequest.builder().name(NAME).value(15.0).build();
@@ -79,7 +79,7 @@ class MetricControllerTest {
         when(createMetricUseCase.createMetric(any(MetricDTO.class))).thenReturn(metric);
 
         // When
-        MetricResponse response = metricController.createPaymentMethod(request);
+        MetricResponse response = metricController.createMetric(request);
 
         // Then
         assertNotNull(response);
@@ -107,8 +107,6 @@ class MetricControllerTest {
         // Then
         assertNotNull(response);
         assertEquals(2, response.size());
-//        assertEquals(1L, response.get(0).getId());
-//        assertEquals(2L, response.get(1).getId());
         assertEquals(NAME_1, response.get(0).getName());
         assertEquals(NAME_2, response.get(1).getName());
         assertEquals(time, response.get(0).getPeriod());

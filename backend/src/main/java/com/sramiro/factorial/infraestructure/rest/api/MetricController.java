@@ -23,7 +23,7 @@ public class MetricController implements MetricControllerSpec {
     private final MetricControllerMapper mapper;
 
     @Override
-    public MetricResponse createPaymentMethod(CreateMetricRequest request) {
+    public MetricResponse createMetric(CreateMetricRequest request) {
         Metric metric = createMetricUseCase.createMetric(mapper.toCreateMetricRequestDto(request));
         return mapper.toMetricResponse(metric);
     }

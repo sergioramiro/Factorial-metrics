@@ -20,7 +20,7 @@ public interface MetricControllerSpec {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    MetricResponse createPaymentMethod(@Valid @RequestBody CreateMetricRequest createMetricRequest);
+    MetricResponse createMetric(@Valid @RequestBody CreateMetricRequest createMetricRequest);
 
     @GetMapping("/average")
     @ResponseStatus(HttpStatus.OK)

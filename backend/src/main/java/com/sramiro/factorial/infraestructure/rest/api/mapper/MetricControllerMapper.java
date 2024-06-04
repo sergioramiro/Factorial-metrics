@@ -7,10 +7,11 @@ import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRe
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.AverageMetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface MetricControllerMapper {
     MetricDTO toCreateMetricRequestDto(CreateMetricRequest request);
 
