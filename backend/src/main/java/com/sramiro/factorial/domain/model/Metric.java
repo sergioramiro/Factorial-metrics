@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -21,10 +22,15 @@ public class Metric {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime timestamp;
+
     @Column(nullable = false)
     private String name;
+
+    // TODO: Take a look at this and improve it.
     @Column(name = "\"value\"", nullable = false)
     private Double value;
 }
