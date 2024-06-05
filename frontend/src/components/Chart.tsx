@@ -12,27 +12,12 @@ import { UserData } from "../data";
 import { JSX } from "react/jsx-runtime";
 
 interface ChartProps {
-  data: string[]; 
+  data: string[];
 }
 
 const Chart: React.FC<ChartProps> = ({ data }) => {
-  console.log(data);
-
-  // const lines = Object.keys(UserData[0])
-  //   .filter((key) => key !== "time") 
-  //   .map((key, i) => (
-  //     <Line
-  //       key={i}
-  //       type="monotone"
-  //       dataKey={key}
-  //       stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`} 
-  //       activeDot={{ r: 8 }}
-  //       strokeWidth={3}
-  //     />
-  //   ));
-
   const lines: JSX.Element[] = [];
-  
+
   data.forEach((serie, index) => {
     lines.push(
       <Line

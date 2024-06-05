@@ -1,11 +1,18 @@
 import React from "react";
-// import { useFetchData2 } from "../hooks/useFetchData2";
+import { useFetchMetrics } from "../hooks/useFetchMetrics";
+
+interface Metric {
+  id: number;
+  timestamp: string;
+  name: string;
+  value: number;
+}
 
 const TableMetrics: React.FC = () => {
-//   const { data, error, isLoading } = useFetchData2();
-//   if (isLoading) return <div>Loading...</div>;
-//   if (error) return <div>Error: {error.message}</div>;
-//   console.log(data);
+  const { data, error, isLoading } = useFetchMetrics();
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  console.log(data);
 
   return (
     <table className="w-full mb-4">
@@ -18,18 +25,14 @@ const TableMetrics: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td className="px-4 py-2">1</td>
-          <td className="px-4 py-2">Elemento 1</td>
-          <td className="px-4 py-2">10</td>
-          <td className="px-4 py-2">2022-01-01 12:00:00</td>
-        </tr>
-        <tr>
-          <td className="px-4 py-2">2</td>
-          <td className="px-4 py-2">Elemento 2</td>
-          <td className="px-4 py-2">20</td>
-          <td className="px-4 py-2">2022-01-01 12:05:00</td>
-        </tr>
+        {data.map((item: Metric, index: number) => (
+          <tr key={item.id} className={index % 2 === 0 ? "bg-gray-100" : ""}>
+            <td className="px-4 py-2">{item.id}</td>
+            <td className="px-4 py-2">{item.name}</td>
+            <td className="px-4 py-2">{item.value}</td>
+            <td className="px-4 py-2">{item.timestamp}</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
