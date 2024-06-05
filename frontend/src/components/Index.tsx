@@ -4,8 +4,11 @@ import Header from "./Header";
 import TableMetrics from "./TableMetrics";
 import { useFetchUserData } from "../hooks/useFetchData";
 
+
 const Index: React.FC = () => {
   const { data, error, isLoading } = useFetchUserData();
+  
+
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -13,7 +16,7 @@ const Index: React.FC = () => {
   return (
     <div>
       <Header />
-      <Chart />
+      <Chart data={data}/>
       <TableMetrics />
     </div>
   );

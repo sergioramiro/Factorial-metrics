@@ -203,25 +203,30 @@ export const UserData = [
     time: "08-13 19:10",
     temperature: 53.3,
     humidity: 60.4,
+    calor:10,
   },
   {
     time: "08-14 20:00",
     temperature: 54.0,
     humidity: 62.3,
+    calor:17,
   },
   {
     time: "08-14 20:10",
     temperature: 54.7,
     humidity: 61.1,
+    calor:33,
   },
   {
     time: "08-15 21:00",
     temperature: 55.4,
     humidity: 60.7,
+    calor:9,
   },
   {
     time: "08-15 21:10",
     temperature: 56.1,
     humidity: 62.8,
+    calor:21,
   },
 ];
