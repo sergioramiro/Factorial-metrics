@@ -1,5 +1,6 @@
 import React from "react";
 import { useFetchMetrics } from "../hooks/useFetchMetrics";
+import DeleteButton from "./DeteleButton";
 
 interface Metric {
   id: number;
@@ -10,6 +11,7 @@ interface Metric {
 
 const TableMetrics: React.FC = () => {
   const { data, error, isLoading } = useFetchMetrics();
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   console.log(data);
@@ -22,6 +24,7 @@ const TableMetrics: React.FC = () => {
           <th className="px-4 py-2">Nombre</th>
           <th className="px-4 py-2">Valor</th>
           <th className="px-4 py-2">Timestamp</th>
+          <th className="px-4 py-2"></th>
         </tr>
       </thead>
       <tbody>
@@ -31,6 +34,9 @@ const TableMetrics: React.FC = () => {
             <td className="px-4 py-2">{item.name}</td>
             <td className="px-4 py-2">{item.value}</td>
             <td className="px-4 py-2">{item.timestamp}</td>
+            <td className="px-4 py-2">
+            <DeleteButton />
+            </td>
           </tr>
         ))}
       </tbody>
