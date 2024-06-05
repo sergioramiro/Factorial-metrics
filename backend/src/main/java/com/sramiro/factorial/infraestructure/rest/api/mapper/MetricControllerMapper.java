@@ -18,4 +18,6 @@ public interface MetricControllerMapper {
     MetricResponse toMetricResponse(Metric metric);
 
     List<AverageMetricResponse> toListOfAverageMetricsResponse(List<AverageMetricView> metrics);
+
+    List<MetricResponse> toMetricResponse(List<Metric> allMetrics);
 }

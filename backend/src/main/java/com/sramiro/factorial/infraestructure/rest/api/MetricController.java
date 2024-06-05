@@ -2,6 +2,7 @@ package com.sramiro.factorial.infraestructure.rest.api;
 
 import com.sramiro.factorial.application.port.in.metrics.CreateMetricUseCase;
 import com.sramiro.factorial.application.port.in.metrics.GetAllMetricNamesUseCase;
+import com.sramiro.factorial.application.port.in.metrics.GetAllMetricsUseCase;
 import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByIntervalUseCase;
 import com.sramiro.factorial.domain.enums.Interval;
 import com.sramiro.factorial.domain.model.Metric;
@@ -21,6 +22,7 @@ import java.util.List;
 public class MetricController implements MetricControllerSpec {
     private final CreateMetricUseCase createMetricUseCase;
     private final GetAverageMetricsByIntervalUseCase getAverageMetricsByIntervalUseCase;
+    private final GetAllMetricsUseCase getAllMetricsUseCase;
     private final GetAllMetricNamesUseCase getAllMetricNamesUseCase;
     private final MetricControllerMapper mapper;
 
@@ -28,6 +30,12 @@ public class MetricController implements MetricControllerSpec {
     public MetricResponse createMetric(CreateMetricRequest request) {
         Metric metric = createMetricUseCase.createMetric(mapper.toCreateMetricRequestDto(request));
         return mapper.toMetricResponse(metric);
+    }
+
+    @Override
+    public List<MetricResponse> getAllMetrics() {
+        List<Metric> allMetrics = getAllMetricsUseCase.getAllMetrics();
+        return mapper.toMetricResponse(allMetrics);
     }
 
     @Override
