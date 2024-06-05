@@ -1,10 +1,15 @@
-// import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
-// const fetchUserData = async () => {
-//   const response = await fetch('http://localhost:8080/metrics/average?interval=day');
-//   return response.json();
-// };
+const fetchUserData = async () => {
+  const response = await fetch(
+    "http://localhost:8080/metrics/names"
+  );
+  return response.json();
+};
 
-// export const useFetchUserData = () => {
-//   return useQuery('userData', fetchUserData);
-// };
+export const useFetchUserData = () => {
+    return useQuery({
+      queryKey: ["userData"],
+      queryFn: fetchUserData,
+    });
+  };
