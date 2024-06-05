@@ -31,6 +31,6 @@ public class Metric {
     private String name;
 
     // TODO: Take a look at this and improve it.
-    @Column(name = "\"value\"", nullable = false)
+    @Column(name = "\"value\"", nullable = false, scale = 2)
     private Double value;
 }

@@ -45,8 +45,11 @@ public class MetricController implements MetricControllerSpec {
     public List<Map<String, Object>> getAverageMetricsByInterval(String interval) {
         List<AverageMetricView> metrics = getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.valueOf(interval.toUpperCase()));
         return metrics.stream()
-                .collect(Collectors.groupingBy(am -> am.getPeriod().format(DateTimeFormatter.ofPattern("MM-dd HH:mm"))))
-                .entrySet().stream()
+                .collect(Collectors.groupingBy(
+                        am -> am.getPeriod().format(DateTimeFormatter.ofPattern("dd-MM HH:mm")),
+                        LinkedHashMap::new,
+                        Collectors.toList()
+                )).entrySet().stream()
                 .map(entry -> {
                     Map<String, Object> map = new LinkedHashMap<>();
                     map.put("time", entry.getKey());
