@@ -8,7 +8,6 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-// import ChartTypeSelector from "./ChartTypeSelector";
 import { useFetchChartMetrics } from "../hooks/useFetchChartMetrics";
 import { JSX } from "react/jsx-runtime";
 
@@ -60,8 +59,8 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
                 name="chartType"
                 value="minute"
                 className="mr-1"
-                onClick={() => {
-                  setFilter("minute");
+                onClick={(e) => {
+                  setFilter((e.target as HTMLInputElement).value);
                 }}
               />
               MINUTOS
@@ -72,8 +71,8 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
                 name="chartType"
                 value="hour"
                 className="mr-1"
-                onClick={() => {
-                  setFilter("hour");
+                onClick={(e) => {
+                  setFilter((e.target as HTMLInputElement).value);
                 }}
               />
               HORAS
@@ -85,8 +84,8 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
                 value="day"
                 className="mr-1"
                 defaultChecked
-                onClick={() => {
-                  setFilter("day");
+                onClick={(e) => {
+                  setFilter((e.target as HTMLInputElement).value);
                 }}
               />
               DIAS
