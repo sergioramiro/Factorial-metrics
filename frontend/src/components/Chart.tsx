@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import ChartTypeSelector from "./ChartTypeSelector";
+// import ChartTypeSelector from "./ChartTypeSelector";
 import { useFetchChartMetrics } from "../hooks/useFetchChartMetrics";
 import { JSX } from "react/jsx-runtime";
 
@@ -17,13 +17,15 @@ interface ChartProps {
 }
 
 const Chart: React.FC<ChartProps> = ({ names }) => {
-  const { data, error, isLoading } = useFetchChartMetrics();
+  const [filter, setFilter] = useState("day");
+  const { data, error, isLoading, refetch } = useFetchChartMetrics(filter);
+
+  useEffect(() => {
+    refetch();
+  }, [filter, refetch]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  // console.log(data);
-  // console.log(UserData);
-  // console.log(names);
   const lines: JSX.Element[] = [];
 
   names.forEach((serie, index) => {
@@ -49,7 +51,49 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
         <Legend verticalAlign="top" height={36} iconType="diamond" />
         {lines}
       </LineChart>
-      <ChartTypeSelector />
+      <div className="my-4">
+        <div className="flex justify-center items-center py-4">
+          <div className="mr-4">
+            <label className="mr-2">
+              <input
+                type="radio"
+                name="chartType"
+                value="minute"
+                className="mr-1"
+                onClick={() => {
+                  setFilter("minute");
+                }}
+              />
+              MINUTOS
+            </label>
+            <label className="mr-2">
+              <input
+                type="radio"
+                name="chartType"
+                value="hour"
+                className="mr-1"
+                onClick={() => {
+                  setFilter("hour");
+                }}
+              />
+              HORAS
+            </label>
+            <label className="mr-2">
+              <input
+                type="radio"
+                name="chartType"
+                value="day"
+                className="mr-1"
+                defaultChecked
+                onClick={() => {
+                  setFilter("day");
+                }}
+              />
+              DIAS
+            </label>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
