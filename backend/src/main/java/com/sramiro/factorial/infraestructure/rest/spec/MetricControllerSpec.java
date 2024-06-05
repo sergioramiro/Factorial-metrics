@@ -1,7 +1,6 @@
 package com.sramiro.factorial.infraestructure.rest.spec;
 
 import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRequest;
-import com.sramiro.factorial.infraestructure.rest.api.dto.response.AverageMetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping(value = "/metrics")
 public interface MetricControllerSpec {
@@ -31,7 +31,7 @@ public interface MetricControllerSpec {
 
     @GetMapping("/average")
     @ResponseStatus(HttpStatus.OK)
-    List<AverageMetricResponse> getAverageMetricsByInterval(
+    List<Map<String, Object>> getAverageMetricsByInterval(
             @RequestParam(value = "interval", required = true)
             @Pattern(regexp = "^(minute|hour|day)$", message = "Interval must be 'minute', 'hour', or 'day'")
             String interval

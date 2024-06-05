@@ -8,7 +8,6 @@ import com.sramiro.factorial.domain.model.AverageMetric;
 import com.sramiro.factorial.domain.model.Metric;
 import com.sramiro.factorial.domain.views.AverageMetricView;
 import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRequest;
-import com.sramiro.factorial.infraestructure.rest.api.dto.response.AverageMetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.dto.response.MetricResponse;
 import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMapper;
 import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMapperImpl;
@@ -21,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -35,6 +35,7 @@ class MetricControllerTest {
     public static final String NAME_1 = "name1";
     public static final String NAME_2 = "name2";
     public static final String NAME = "name";
+    public static final String TIME = "time";
 
     @Mock
     private CreateMetricUseCase createMetricUseCase;
@@ -102,15 +103,15 @@ class MetricControllerTest {
         when(getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.DAY)).thenReturn(listMetrics);
 
         // When
-        List<AverageMetricResponse> response = metricController.getAverageMetricsByInterval(Interval.DAY.name());
+        List<Map<String, Object>> response = metricController.getAverageMetricsByInterval(Interval.DAY.name());
 
         // Then
         assertNotNull(response);
         assertEquals(2, response.size());
-        assertEquals(NAME_1, response.get(0).getName());
-        assertEquals(NAME_2, response.get(1).getName());
-        assertEquals(time, response.get(0).getPeriod());
-        assertEquals(time.plusMinutes(1L), response.get(1).getPeriod());
+        assertEquals(11.5, response.get(0).get(NAME_1));
+        assertEquals(22.5, response.get(1).get(NAME_2));
+        assertNotNull(response.get(0).get(TIME));
+        assertNotNull(response.get(0).get(TIME));
 
         verify(getAverageMetricsByIntervalUseCase).getAverageMetricsByInterval(Interval.DAY);
 
