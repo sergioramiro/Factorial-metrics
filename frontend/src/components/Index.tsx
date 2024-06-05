@@ -14,7 +14,7 @@ const Index: React.FC = () => {
   return (
     <div>
       <Header />
-      <Chart data={data} />
+      <Chart names={data} />
       <CreateMetric />
       <TableMetrics />
     </div>

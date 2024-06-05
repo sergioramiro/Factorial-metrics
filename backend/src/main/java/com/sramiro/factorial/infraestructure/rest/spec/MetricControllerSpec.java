@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,7 @@ public interface MetricControllerSpec {
     List<MetricResponse> getAllMetrics();
 
     @GetMapping("/average")
+    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})
     @ResponseStatus(HttpStatus.OK)
     List<Map<String, Object>> getAverageMetricsByInterval(
             @RequestParam(value = "interval", required = true)
