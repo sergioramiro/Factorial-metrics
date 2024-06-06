@@ -33,6 +33,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.3.0'
+    testImplementation 'org.testcontainers:testcontainers:1.19.8'
+    testImplementation 'org.testcontainers:postgresql:1.19.8'
+    testImplementation 'io.rest-assured:rest-assured:5.4.0'
 }
 
 tasks.named('test') {
