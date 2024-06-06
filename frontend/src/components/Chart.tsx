@@ -19,14 +19,17 @@ const labelFilters = [
   {
     text: "MINUTOS",
     value: "minute",
+    default: false,
   },
   {
     text: "HORAS",
     value: "hour",
+    default: false,
   },
   {
     text: "DIAS",
     value: "day",
+    default: true,
   },
 ];
 
@@ -77,6 +80,7 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
                       name="chartType"
                       value={item.value}
                       className="mr-1"
+                      defaultChecked={item.default}
                       onClick={() => {
                         setFilter(item.value);
                       }}
