@@ -35,7 +35,7 @@ const TableMetrics: React.FC = () => {
               <td className="px-4 py-2">{item.value}</td>
               <td className="px-4 py-2">{item.timestamp}</td>
               <td className="px-4 py-2">
-                <DeleteButton />
+                <DeleteButton id={item.id} />
               </td>
             </tr>
           ))}
