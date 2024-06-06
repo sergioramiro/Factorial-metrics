@@ -5,7 +5,7 @@ import TableMetrics from "./TableMetrics";
 import CreateMetric from "./CreateMetric";
 import { useFetchUserData } from "../hooks/useFetchData";
 
-const Index: React.FC = () => {
+const App: React.FC = () => {
   const { data, error, isLoading } = useFetchUserData();
 
   if (isLoading) return <div>Loading...</div>;
@@ -20,4 +20,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default App;
