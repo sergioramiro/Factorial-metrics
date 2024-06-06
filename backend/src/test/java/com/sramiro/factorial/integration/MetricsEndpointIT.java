@@ -12,8 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MetricsEndpointIT extends TestContainerConfiguration {
     public static final String METRICS = "/metrics";
@@ -61,6 +64,30 @@ class MetricsEndpointIT extends TestContainerConfiguration {
 
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
         assertEquals(10, metricCount);
+
+    }
+
+    @Test
+    void getAllMetricNamesEndpoint_ShouldReturnAllTheMetricNames() {
+
+        metricRepository.save(Metric.builder().value(VALUE).name(TEST + "1").build());
+        metricRepository.save(Metric.builder().value(VALUE).name(TEST + "2").build());
+        metricRepository.save(Metric.builder().value(VALUE).name(TEST + "3").build());
+
+        Response response = given()
+                .get(METRICS + "/names")
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .extract().response();
+
+        List<Object> nameList = response.jsonPath().getList("$");
+        int NamesCount = nameList.size();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(3, NamesCount);
+        assertTrue(nameList.contains(TEST + "1"));
+        assertTrue(nameList.contains(TEST + "2"));
+        assertTrue(nameList.contains(TEST + "3"));
 
     }
 
