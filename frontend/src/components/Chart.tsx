@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import {
   LineChart,
   Line,
@@ -14,6 +14,21 @@ import { JSX } from "react/jsx-runtime";
 interface ChartProps {
   names: string[];
 }
+
+const labelFilters = [
+  {
+    text: "MINUTOS",
+    value: "minute",
+  },
+  {
+    text: "HORAS",
+    value: "hour",
+  },
+  {
+    text: "DIAS",
+    value: "day",
+  },
+];
 
 const Chart: React.FC<ChartProps> = ({ names }) => {
   const [filter, setFilter] = useState("day");
@@ -53,43 +68,24 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
       <div className="my-4">
         <div className="flex justify-center items-center py-4">
           <div className="mr-4">
-            <label className="mr-2">
-              <input
-                type="radio"
-                name="chartType"
-                value="minute"
-                className="mr-1"
-                onClick={(e) => {
-                  setFilter((e.target as HTMLInputElement).value);
-                }}
-              />
-              MINUTOS
-            </label>
-            <label className="mr-2">
-              <input
-                type="radio"
-                name="chartType"
-                value="hour"
-                className="mr-1"
-                onClick={(e) => {
-                  setFilter((e.target as HTMLInputElement).value);
-                }}
-              />
-              HORAS
-            </label>
-            <label className="mr-2">
-              <input
-                type="radio"
-                name="chartType"
-                value="day"
-                className="mr-1"
-                defaultChecked
-                onClick={(e) => {
-                  setFilter((e.target as HTMLInputElement).value);
-                }}
-              />
-              DIAS
-            </label>
+            {labelFilters.map((item, idx) => {
+              return (
+                <Fragment key={idx}>
+                  <label className="mr-2">
+                    <input
+                      type="radio"
+                      name="chartType"
+                      value={item.value}
+                      className="mr-1"
+                      onClick={() => {
+                        setFilter(item.value);
+                      }}
+                    />
+                    {item.text}
+                  </label>
+                </Fragment>
+              );
+            })}
           </div>
         </div>
       </div>
