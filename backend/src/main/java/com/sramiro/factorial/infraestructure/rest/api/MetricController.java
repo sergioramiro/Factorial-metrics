@@ -1,6 +1,7 @@
 package com.sramiro.factorial.infraestructure.rest.api;
 
 import com.sramiro.factorial.application.port.in.metrics.CreateMetricUseCase;
+import com.sramiro.factorial.application.port.in.metrics.DeleteMetricByIdUseCase;
 import com.sramiro.factorial.application.port.in.metrics.GetAllMetricNamesUseCase;
 import com.sramiro.factorial.application.port.in.metrics.GetAllMetricsUseCase;
 import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByIntervalUseCase;
@@ -27,6 +28,7 @@ public class MetricController implements MetricControllerSpec {
     private final GetAverageMetricsByIntervalUseCase getAverageMetricsByIntervalUseCase;
     private final GetAllMetricsUseCase getAllMetricsUseCase;
     private final GetAllMetricNamesUseCase getAllMetricNamesUseCase;
+    private final DeleteMetricByIdUseCase deleteMetricByIdUseCase;
     private final MetricControllerMapper mapper;
 
     @Override
@@ -62,5 +64,10 @@ public class MetricController implements MetricControllerSpec {
     @Override
     public List<String> getAllMetricNames() {
         return getAllMetricNamesUseCase.getAllMetricNames();
+    }
+
+    @Override
+    public void deleteMetricById(Long id) {
+        deleteMetricByIdUseCase.deleteMetricById(id);
     }
 }
