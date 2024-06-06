@@ -24,13 +24,10 @@ public interface MetricControllerSpec {
     MetricResponse createMetric(@Valid @RequestBody CreateMetricRequest createMetricRequest);
 
     @GetMapping()
-    //TODO: move to application.properties
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})
     @ResponseStatus(HttpStatus.OK)
     List<MetricResponse> getAllMetrics();
 
     @GetMapping("/average")
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})
     @ResponseStatus(HttpStatus.OK)
     List<Map<String, Object>> getAverageMetricsByInterval(
             @RequestParam(value = "interval", required = true)
@@ -39,8 +36,6 @@ public interface MetricControllerSpec {
     );
 
     @GetMapping("/names")
-    //TODO: move to application.properties
-    @CrossOrigin(origins = {"http://localhost:3000", "http://localhost:5173"})
     @ResponseStatus(HttpStatus.OK)
     List<String> getAllMetricNames();
 }
