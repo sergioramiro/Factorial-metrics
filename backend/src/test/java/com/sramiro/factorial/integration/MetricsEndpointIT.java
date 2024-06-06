@@ -52,7 +52,7 @@ class MetricsEndpointIT extends TestContainerConfiguration {
     @Test
     void getMetricsEndpoint_ShouldReturnTenMetrics() {
         for (int i = 0; i < 10; i++) {
-            metricRepository.save(Metric.builder().value(VALUE).name(TEST).build());
+            saveInRepository(TEST, VALUE);
         }
         Response response = given()
                 .get(METRICS)
@@ -70,9 +70,9 @@ class MetricsEndpointIT extends TestContainerConfiguration {
     @Test
     void getAllMetricNamesEndpoint_ShouldReturnAllTheMetricNames() {
 
-        metricRepository.save(Metric.builder().value(VALUE).name(TEST + "1").build());
-        metricRepository.save(Metric.builder().value(VALUE).name(TEST + "2").build());
-        metricRepository.save(Metric.builder().value(VALUE).name(TEST + "3").build());
+        saveInRepository(TEST + "1", VALUE);
+        saveInRepository(TEST + "2", VALUE);
+        saveInRepository(TEST + "3", VALUE);
 
         Response response = given()
                 .get(METRICS + "/names")
@@ -89,6 +89,10 @@ class MetricsEndpointIT extends TestContainerConfiguration {
         assertTrue(nameList.contains(TEST + "2"));
         assertTrue(nameList.contains(TEST + "3"));
 
+    }
+
+    private void saveInRepository(String name, double value) {
+        metricRepository.save(Metric.builder().value(value).name(name).build());
     }
 
 }
