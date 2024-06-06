@@ -1,5 +1,5 @@
 import React from "react";
-import { useFetchMetrics } from "../hooks/useFetchMetrics";
+import { useGetAllMetrics } from "../hooks/useGetAllMetrics";
 import DeleteButton from "./DeteleButton";
 
 interface Metric {
@@ -10,7 +10,7 @@ interface Metric {
 }
 
 const TableMetrics: React.FC = () => {
-  const { data, error, isLoading } = useFetchMetrics();
+  const { data, error, isLoading } = useGetAllMetrics();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

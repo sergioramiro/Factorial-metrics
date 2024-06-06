@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-const fetchChartMetrics = async (filter: string = "day") => {
+const getChartMetrics = async (filter: string = "day") => {
   const response = await fetch(
     `http://localhost:8080/metrics/average?interval=${filter}`
   );
@@ -10,9 +10,9 @@ const fetchChartMetrics = async (filter: string = "day") => {
   return response.json();
 };
 
-export const useFetchChartMetrics = (filter: string) => {
+export const useGetChartMetrics = (filter: string) => {
   return useQuery({
     queryKey: ["chartMetrics"],
-    queryFn: () => fetchChartMetrics(filter),
+    queryFn: () => getChartMetrics(filter),
   });
 };

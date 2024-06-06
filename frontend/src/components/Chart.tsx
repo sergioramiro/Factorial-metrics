@@ -8,7 +8,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { useFetchChartMetrics } from "../hooks/useFetchChartMetrics";
+import { useGetChartMetrics } from "../hooks/useGetChartMetrics";
 import { JSX } from "react/jsx-runtime";
 
 interface ChartProps {
@@ -35,7 +35,7 @@ const labelFilters = [
 
 const Chart: React.FC<ChartProps> = ({ names }) => {
   const [filter, setFilter] = useState("day");
-  const { data, error, isLoading, refetch } = useFetchChartMetrics(filter);
+  const { data, error, isLoading, refetch } = useGetChartMetrics(filter);
 
   useEffect(() => {
     refetch();

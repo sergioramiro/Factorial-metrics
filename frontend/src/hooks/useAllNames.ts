@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
-const fetchUserData = async () => {
+const getAllNames = async () => {
   const response = await fetch("http://localhost:8080/metrics/names");
   return response.json();
 };
 
-export const useFetchUserData = () => {
+export const useGetAllNames = () => {
   return useQuery({
     queryKey: ["userData"],
-    queryFn: fetchUserData,
+    queryFn: getAllNames,
   });
 };

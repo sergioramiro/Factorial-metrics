@@ -3,10 +3,10 @@ import Chart from "./Chart";
 import Header from "./Header";
 import TableMetrics from "./TableMetrics";
 import CreateMetric from "./CreateMetric";
-import { useFetchUserData } from "../hooks/useFetchData";
+import { useGetAllNames } from "../hooks/useAllNames";
 
 const App: React.FC = () => {
-  const { data, error, isLoading } = useFetchUserData();
+  const { data, error, isLoading } = useGetAllNames();
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
