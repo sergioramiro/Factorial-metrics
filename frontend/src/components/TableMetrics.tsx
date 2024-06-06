@@ -16,7 +16,7 @@ const TableMetrics: React.FC = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="max-h-96 overflow-y-auto">
+    <div className="max-h-96 overflow-y-auto rounded-md">
       <table className="w-full mb-4">
         <thead>
           <tr className="bg-gray-200">

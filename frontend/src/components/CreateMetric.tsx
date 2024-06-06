@@ -29,7 +29,7 @@ const CreateMetric: React.FC = () => {
             onChange={(e) => setValue(e.target.value)}
           />
           <button
-            className={`bg-factorial  text-white font-bold py-2 px-4 rounded ${
+            className={`bg-factorial  hover:bg-factorial-500 text-white font-bold py-2 px-4 rounded ${
               isButtonDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
             disabled={isButtonDisabled}

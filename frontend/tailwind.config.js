@@ -7,7 +7,7 @@ export default {
     extend: {
       colors: {
         'factorial': '#ff345c',
-        'factorial-500': '#fc9cac',
+        'factorial-500': '#E0002D',
       }
     },
   },
