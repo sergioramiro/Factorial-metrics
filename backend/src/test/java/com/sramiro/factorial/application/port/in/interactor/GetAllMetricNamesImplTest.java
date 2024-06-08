@@ -1,7 +1,6 @@
-package com.sramiro.factorial.application.service.metrics.impl;
+package com.sramiro.factorial.application.port.in.interactor;
 
 import com.sramiro.factorial.application.port.in.GetAllMetricNamesUseCase;
-import com.sramiro.factorial.application.port.in.interactor.GetAllMetricNamesImpl;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;

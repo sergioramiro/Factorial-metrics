@@ -1,6 +1,5 @@
-package com.sramiro.factorial.application.service.metrics.impl;
+package com.sramiro.factorial.application.port.in.interactor;
 
-import com.sramiro.factorial.application.port.in.interactor.GetAverageMetricsByIntervalImpl;
 import com.sramiro.factorial.application.port.in.mapper.GetAverageMetricsByIntervalUseCaseMapper;
 import com.sramiro.factorial.application.port.in.mapper.GetAverageMetricsByIntervalUseCaseMapperImpl;
 import com.sramiro.factorial.application.port.out.MetricRepository;

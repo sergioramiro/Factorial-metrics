@@ -37,7 +37,7 @@ public class DBMetricRepository implements MetricRepository {
 
     @Override
     public List<Metric> findAll() {
-        return mapper.toDomainList(repository.findAll());
+        return mapper.toDomainList(repository.findAllByOrderByIdDesc());
     }
 
     @Override

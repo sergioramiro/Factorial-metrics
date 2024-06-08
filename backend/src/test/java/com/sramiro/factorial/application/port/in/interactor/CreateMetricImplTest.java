@@ -1,6 +1,5 @@
-package com.sramiro.factorial.application.service.metrics.impl;
+package com.sramiro.factorial.application.port.in.interactor;
 
-import com.sramiro.factorial.application.port.in.interactor.CreateMetricImpl;
 import com.sramiro.factorial.application.port.in.mapper.CreateMetricUseCaseMapper;
 import com.sramiro.factorial.application.port.in.mapper.CreateMetricUseCaseMapperImpl;
 import com.sramiro.factorial.application.port.out.MetricRepository;

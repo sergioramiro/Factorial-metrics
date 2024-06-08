@@ -22,4 +22,8 @@ public interface SpringDataMetricRepository extends JpaRepository<MetricDBEntity
 
     @Query(nativeQuery = true, value = "SELECT name FROM metric GROUP BY name")
     List<String> getAllMetricNames();
+
+    List<MetricDBEntity> findAllByOrderByIdDesc();
+
+
 }

@@ -1,6 +1,5 @@
-package com.sramiro.factorial.application.service.metrics.impl;
+package com.sramiro.factorial.application.port.in.interactor;
 
-import com.sramiro.factorial.application.port.in.interactor.GetAllMetricsImpl;
 import com.sramiro.factorial.application.port.out.MetricRepository;
 import com.sramiro.factorial.domain.model.Metric;
 import org.junit.jupiter.api.Test;
