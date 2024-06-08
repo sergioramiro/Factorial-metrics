@@ -1,4 +1,4 @@
-package com.sramiro.factorial.infraestructure.db.configuration.flyway;
+package com.sramiro.factorial.infraestructure.database.configuration.flyway;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;

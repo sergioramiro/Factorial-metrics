@@ -1,13 +1,12 @@
 package com.sramiro.factorial.application.service.metrics.impl;
 
+import com.sramiro.factorial.application.port.in.GetAllMetricNamesUseCase;
+import com.sramiro.factorial.application.port.in.interactor.GetAllMetricNamesImpl;
 import com.sramiro.factorial.application.port.out.MetricRepository;
-import com.sramiro.factorial.application.service.mapper.MetricMapper;
-import com.sramiro.factorial.application.service.mapper.MetricMapperImpl;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -20,16 +19,17 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @RequiredArgsConstructor
-class GetAllMetricNamesServiceTest {
+class GetAllMetricNamesImplTest {
 
     @Mock
     private MetricRepository metricRepository;
 
-    @InjectMocks
-    private GetAllMetricNamesService service;
+    private GetAllMetricNamesUseCase useCase;
 
-    @Spy
-    private MetricMapper metricMapper = new MetricMapperImpl();
+    @BeforeEach
+    public void init() {
+        useCase = new GetAllMetricNamesImpl(metricRepository);
+    }
 
     @Test
     void getAllMetricNames_EmptyDatabaseShouldReturnEmptyList() {
@@ -37,7 +37,7 @@ class GetAllMetricNamesServiceTest {
         when(metricRepository.getAllMetricNames()).thenReturn(new ArrayList<>());
 
         // When
-        List<String> result = service.getAllMetricNames();
+        List<String> result = useCase.execute();
 
         // Then
         assertNotNull(result);
@@ -50,7 +50,7 @@ class GetAllMetricNamesServiceTest {
         when(metricRepository.getAllMetricNames()).thenReturn(List.of("name"));
 
         // When
-        List<String> result = service.getAllMetricNames();
+        List<String> result = useCase.execute();
 
         // Then
         assertNotNull(result);
@@ -64,7 +64,7 @@ class GetAllMetricNamesServiceTest {
         when(metricRepository.getAllMetricNames()).thenReturn(List.of("name1", "name2", "name3"));
 
         // When
-        List<String> metricNames = service.getAllMetricNames();
+        List<String> metricNames = useCase.execute();
 
         // Then
         assertNotNull(metricNames);

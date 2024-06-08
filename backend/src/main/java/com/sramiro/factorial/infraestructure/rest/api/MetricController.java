@@ -1,11 +1,10 @@
 package com.sramiro.factorial.infraestructure.rest.api;
 
-import com.sramiro.factorial.application.port.in.metrics.CreateMetricUseCase;
-import com.sramiro.factorial.application.port.in.metrics.DeleteMetricByIdUseCase;
-import com.sramiro.factorial.application.port.in.metrics.GetAllMetricNamesUseCase;
-import com.sramiro.factorial.application.port.in.metrics.GetAllMetricsUseCase;
-import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByIntervalUseCase;
-import com.sramiro.factorial.domain.enums.Interval;
+import com.sramiro.factorial.application.port.in.CreateMetricUseCase;
+import com.sramiro.factorial.application.port.in.DeleteMetricByIdUseCase;
+import com.sramiro.factorial.application.port.in.GetAllMetricNamesUseCase;
+import com.sramiro.factorial.application.port.in.GetAllMetricsUseCase;
+import com.sramiro.factorial.application.port.in.GetAverageMetricsByIntervalUseCase;
 import com.sramiro.factorial.domain.model.Metric;
 import com.sramiro.factorial.domain.views.AverageMetricView;
 import com.sramiro.factorial.infraestructure.rest.api.dto.request.CreateMetricRequest;
@@ -33,19 +32,18 @@ public class MetricController implements MetricControllerSpec {
 
     @Override
     public MetricResponse createMetric(CreateMetricRequest request) {
-        Metric metric = createMetricUseCase.createMetric(mapper.toCreateMetricRequestDto(request));
-        return mapper.toMetricResponse(metric);
+        return mapper.toMetricResponse(createMetricUseCase.execute(mapper.toInputValues(request)));
     }
 
     @Override
     public List<MetricResponse> getAllMetrics() {
-        List<Metric> allMetrics = getAllMetricsUseCase.getAllMetrics();
+        List<Metric> allMetrics = getAllMetricsUseCase.execute();
         return mapper.toMetricResponse(allMetrics);
     }
 
     @Override
     public List<Map<String, Object>> getAverageMetricsByInterval(String interval) {
-        List<AverageMetricView> metrics = getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.valueOf(interval.toUpperCase()));
+        List<AverageMetricView> metrics = getAverageMetricsByIntervalUseCase.execute(mapper.toInputValues(interval.toUpperCase()));
         return metrics.stream()
                 .collect(Collectors.groupingBy(
                         am -> am.getPeriod().format(DateTimeFormatter.ofPattern("dd-MM HH:mm")),
@@ -63,11 +61,11 @@ public class MetricController implements MetricControllerSpec {
 
     @Override
     public List<String> getAllMetricNames() {
-        return getAllMetricNamesUseCase.getAllMetricNames();
+        return getAllMetricNamesUseCase.execute();
     }
 
     @Override
     public void deleteMetricById(Long id) {
-        deleteMetricByIdUseCase.deleteMetricById(id);
+        deleteMetricByIdUseCase.execute(mapper.toInputValues(id));
     }
 }

@@ -37,7 +37,7 @@ class MetricsEndpointIT extends TestContainerConfiguration {
 
     @Test
     void postMetricEndpoint_ShouldIncreaseMetricCountInDatabase() {
-        long count = metricRepository.count();
+        int count = metricRepository.findAll().size();
         given()
                 .contentType(CONTENT_TYPE)
                 .body(CreateMetricRequest.builder().name(TEST).value(VALUE).build())
@@ -45,7 +45,7 @@ class MetricsEndpointIT extends TestContainerConfiguration {
                 .post(METRICS)
                 .then()
                 .statusCode(HttpStatus.CREATED.value());
-        long count2 = metricRepository.count();
+        long count2 = metricRepository.findAll().size();
         assertEquals(count + 1, count2);
     }
 
@@ -89,6 +89,26 @@ class MetricsEndpointIT extends TestContainerConfiguration {
         assertTrue(nameList.contains(TEST + "2"));
         assertTrue(nameList.contains(TEST + "3"));
 
+    }
+
+    @Test
+    void getAllMetricEndpoint_ShouldReturnAllTheMetric() {
+
+        saveInRepository(TEST + "1", VALUE);
+        saveInRepository(TEST + "2", VALUE);
+        saveInRepository(TEST + "3", VALUE);
+
+        Response response = given()
+                .get(METRICS)
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .extract().response();
+
+        List<Object> nameList = response.jsonPath().getList("$");
+        int NamesCount = nameList.size();
+
+        assertEquals(HttpStatus.OK.value(), response.getStatusCode());
+        assertEquals(3, NamesCount);
     }
 
     private void saveInRepository(String name, double value) {

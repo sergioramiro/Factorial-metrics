@@ -1,15 +1,14 @@
 package com.sramiro.factorial.application.service.metrics.impl;
 
+import com.sramiro.factorial.application.port.in.interactor.GetAllMetricsImpl;
 import com.sramiro.factorial.application.port.out.MetricRepository;
-import com.sramiro.factorial.application.service.mapper.MetricMapper;
-import com.sramiro.factorial.application.service.mapper.MetricMapperImpl;
 import com.sramiro.factorial.domain.model.Metric;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,9 +20,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-@RequiredArgsConstructor
-class GetAllMetricsServiceTest {
+@ExtendWith(MockitoExtension.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+class GetAllMetricsImplTest {
 
 
     public static final String METRIC = "metric";
@@ -32,10 +31,7 @@ class GetAllMetricsServiceTest {
     private MetricRepository metricRepository;
 
     @InjectMocks
-    private GetAllMetricsService service;
-
-    @Spy
-    private MetricMapper metricMapper = new MetricMapperImpl();
+    private GetAllMetricsImpl service;
 
     @Test
     void getAllMetrics_ShouldReturnListOfDTOs() {
@@ -48,7 +44,7 @@ class GetAllMetricsServiceTest {
         when(metricRepository.findAll()).thenReturn(metrics);
 
         // When
-        List<Metric> result = service.getAllMetrics();
+        List<Metric> result = service.execute();
 
         // Then
         assertNotNull(result);

@@ -1,8 +1,7 @@
 package com.sramiro.factorial.infraestructure.rest.api;
 
-import com.sramiro.factorial.application.dto.MetricDTO;
-import com.sramiro.factorial.application.port.in.metrics.CreateMetricUseCase;
-import com.sramiro.factorial.application.port.in.metrics.GetAverageMetricsByIntervalUseCase;
+import com.sramiro.factorial.application.port.in.CreateMetricUseCase;
+import com.sramiro.factorial.application.port.in.GetAverageMetricsByIntervalUseCase;
 import com.sramiro.factorial.domain.enums.Interval;
 import com.sramiro.factorial.domain.model.AverageMetric;
 import com.sramiro.factorial.domain.model.Metric;
@@ -57,7 +56,7 @@ class MetricControllerTest {
         CreateMetricRequest request = CreateMetricRequest.builder().name(NAME).value(15.0).build();
         Metric metric = Metric.builder().id(1L).name(NAME).value(15.0).timestamp(LocalDateTime.now()).build();
 
-        when(createMetricUseCase.createMetric(any(MetricDTO.class))).thenReturn(metric);
+        when(createMetricUseCase.execute(any(CreateMetricUseCase.InputValues.class))).thenReturn(metric);
 
         // When
         MetricResponse response = metricController.createMetric(request);
@@ -77,7 +76,7 @@ class MetricControllerTest {
         CreateMetricRequest request = CreateMetricRequest.builder().name(NAME).value(15.0).build();
         Metric metric = Metric.builder().id(2L).name(NAME_2).value(20.0).timestamp(LocalDateTime.now()).build();
 
-        when(createMetricUseCase.createMetric(any(MetricDTO.class))).thenReturn(metric);
+        when(createMetricUseCase.execute(any(CreateMetricUseCase.InputValues.class))).thenReturn(metric);
 
         // When
         MetricResponse response = metricController.createMetric(request);
@@ -89,7 +88,7 @@ class MetricControllerTest {
         assertEquals(NAME_2, response.getName());
         assertNotNull(response.getTimestamp());
 
-        verify(createMetricUseCase, times(1)).createMetric(any(MetricDTO.class));
+        verify(createMetricUseCase, times(1)).execute(any(CreateMetricUseCase.InputValues.class));
 
     }
 
@@ -100,10 +99,11 @@ class MetricControllerTest {
         AverageMetric metric2 = AverageMetric.builder().name(NAME_2).average(22.5).period(time.plusMinutes(1L)).build();
         // Given
         List<AverageMetricView> listMetrics = List.of(metric1, metric2);
-        when(getAverageMetricsByIntervalUseCase.getAverageMetricsByInterval(Interval.DAY)).thenReturn(listMetrics);
+        GetAverageMetricsByIntervalUseCase.InputValues input = GetAverageMetricsByIntervalUseCase.InputValues.builder().interval(Interval.DAY.name()).build();
+        when(getAverageMetricsByIntervalUseCase.execute(input)).thenReturn(listMetrics);
 
         // When
-        List<Map<String, Object>> response = metricController.getAverageMetricsByInterval(Interval.DAY.name());
+        List<Map<String, Object>> response = metricController.getAverageMetricsByInterval("DAY");
 
         // Then
         assertNotNull(response);
@@ -113,8 +113,32 @@ class MetricControllerTest {
         assertNotNull(response.get(0).get(TIME));
         assertNotNull(response.get(0).get(TIME));
 
-        verify(getAverageMetricsByIntervalUseCase).getAverageMetricsByInterval(Interval.DAY);
+        verify(getAverageMetricsByIntervalUseCase).execute(input);
 
+    }
+
+    @Test
+    void getAverageMetricsByInterval_ShouldCallGetAverageMetricsByIntervalUseCaseAndReturnValidListMetricResponseWithInputInLowerCase() {
+        LocalDateTime time = LocalDateTime.now();
+        AverageMetric metric1 = AverageMetric.builder().name(NAME_1).average(11.5).period(time).build();
+        AverageMetric metric2 = AverageMetric.builder().name(NAME_2).average(22.5).period(time.plusMinutes(1L)).build();
+        // Given
+        List<AverageMetricView> listMetrics = List.of(metric1, metric2);
+        GetAverageMetricsByIntervalUseCase.InputValues input = GetAverageMetricsByIntervalUseCase.InputValues.builder().interval(Interval.DAY.name()).build();
+        when(getAverageMetricsByIntervalUseCase.execute(input)).thenReturn(listMetrics);
+
+        // When
+        List<Map<String, Object>> response = metricController.getAverageMetricsByInterval("day");
+
+        // Then
+        assertNotNull(response);
+        assertEquals(2, response.size());
+        assertEquals(11.5, response.get(0).get(NAME_1));
+        assertEquals(22.5, response.get(1).get(NAME_2));
+        assertNotNull(response.get(0).get(TIME));
+        assertNotNull(response.get(0).get(TIME));
+
+        verify(getAverageMetricsByIntervalUseCase).execute(input);
     }
 
 }

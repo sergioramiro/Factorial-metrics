@@ -3,7 +3,7 @@ package com.sramiro.factorial;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.sramiro.factorial")
 public class FactorialMetricsApplication {
 
     public static void main(String[] args) {
