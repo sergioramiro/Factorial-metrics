@@ -36,6 +36,8 @@ dependencies {
     testImplementation 'org.testcontainers:testcontainers:1.19.8'
     testImplementation 'org.testcontainers:postgresql:1.19.8'
     testImplementation 'io.rest-assured:rest-assured:5.4.0'
+    implementation 'org.flywaydb:flyway-core:10.14.0'
+    runtimeOnly 'org.flywaydb:flyway-database-postgresql:10.14.0'
 }
 
 tasks.named('test') {
