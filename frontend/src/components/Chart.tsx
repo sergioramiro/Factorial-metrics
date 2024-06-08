@@ -15,6 +15,8 @@ interface ChartProps {
   names: string[];
 }
 
+const colors = ["#ff345c", "#0A38FA", "#FABD0A", "#0AFA33", "#A58B3E"];
+
 const labelFilters = [
   {
     text: "MINUTOS",
@@ -51,7 +53,7 @@ const Chart: React.FC<ChartProps> = ({ names }) => {
         key={index}
         type="monotone"
         dataKey={serie}
-        stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+        stroke={colors[index % colors.length]}
         activeDot={{ r: 8 }}
         strokeWidth={3}
       />
