@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const deleteMetric = async (id: number) => {
-  console.log(id);
   await fetch(`http://localhost:8080/metrics/${id}`, {
     method: "DELETE",
   });
@@ -17,6 +16,7 @@ const useDeteleMetricById = () => {
     onSuccess: async () => {
       await queryClient.fetchQuery({ queryKey: ["metrics"] });
       await queryClient.fetchQuery({ queryKey: ["chartMetrics"] });
+      await queryClient.fetchQuery({ queryKey: ["allNames"] });
     },
   });
 

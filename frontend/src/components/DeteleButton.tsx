@@ -5,13 +5,13 @@ interface DeleteButtonProps {
   id: number;
 }
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({id}) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({ id }) => {
   const { deleteRecord } = useDeteleMetricById();
 
   const handleDelete = () => {
     deleteRecord(id);
   };
-  
+
   return (
     <button
       onClick={() => handleDelete()}

@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAddMetric } from "../hooks/useAddMetric";
 
 const CreateMetric: React.FC = () => {
   const [name, setName] = useState("");
   const [value, setValue] = useState("");
-  const { handleSubmit } = useAddMetric();
+  const { handleSubmit, mutation } = useAddMetric();
 
   const isButtonDisabled = name === "" || value === "";
+
+  useEffect(() => {
+    if (mutation.isPending) {
+      setName("");
+      setValue("");
+    }
+  }, [mutation.isPending]);
 
   return (
     <div className="my-4">

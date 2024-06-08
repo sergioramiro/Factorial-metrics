@@ -27,6 +27,7 @@ export const useAddMetric = () => {
     onSuccess: async () => {
       await queryClient.fetchQuery({ queryKey: ["metrics"] });
       await queryClient.fetchQuery({ queryKey: ["chartMetrics"] });
+      await queryClient.fetchQuery({ queryKey: ["allNames"] });
     },
   });
 
@@ -36,5 +37,5 @@ export const useAddMetric = () => {
     const entries = Object.fromEntries(formData);
     mutation.mutate(entries);
   };
-  return { handleSubmit };
+  return { handleSubmit, mutation };
 };
