@@ -3,9 +3,10 @@
 1. [Description](#description)
 2. [Technologies](#technologies)
 3. [Installation](#installation)
-4. [Use](#use)
+4. [How to use](#How-to-use)
 5. [Decisions and Trade-offs](#decisions-and-trade-offs)
-6. [Interesting points to discuss](#Interesting-points-to-discuss)
+6. [Challenges faced](#Challenges-faced)
+7. [Things to add or improve](#Things-to-add-or-improve)
 
 ## Description ℹ️
 
@@ -36,6 +37,7 @@ Dependencies are managed by Gradle, ensuring efficient and easy-to-maintain back
 ## Installation 🛠️
 
 Step-by-step instructions to install and configure the project locally.
+
 ### Prerequisites 📦
 
 Before you start, make sure you have the following installed:
@@ -60,7 +62,8 @@ To install and run the application, follow these steps:
     ```
 
 This will place the application in the root folder `Factorial-metrics` and run all necessary services in Docker.
-## Use 🚀
+
+## How to use 🚀
 
 Once the application is up and running, open your web browser and go to:
 ```
@@ -68,46 +71,49 @@ http://localhost:3000/
 ```
 
 At this web address you will find the app launched and you can start exploring and testing all its features.
-# Decisions and Trade-offs
-## Backend
-- Developed in Java and Spring Boot due to my familiarity and experience with this technology. Spring Boot simplifies the configuration and development of Java applications, with strong support for RESTful APIs, security, and data access.
 
-- I followed the Hexagonal Architecture (Ports and Adapters) to create a decoupled system, separating the core logic from external systems like databases. This improves maintainability and testability by isolating the business logic from infrastructure concerns.
+## Decisions and Trade-offs 🤝
 
-- I used JPA for its powerful ORM capability, simplifying interactions with the database and keeping a clean and modular code.
+### Backend
 
-- I used Flyway to automate the creation of the database, as well as the insertion of initial data. This ensured that the database schema was always up to date and that the necessary data was available when starting the project.
+- Developed in **Java** and **Spring Boot** due to my familiarity and experience with this technology. Spring Boot simplifies the configuration and development of Java applications, with strong support for RESTful APIs, security, and data access.
 
-- Lombok reduced the repetitive code in Java classes by generating common methods, allowing me to focus more on the business logic.
+- I followed the **Hexagonal Architecture** (Ports and Adapters) to create a decoupled system, separating the core logic from external systems like databases. This improves maintainability and testability by isolating the business logic from infrastructure concerns.
 
-- MapStruct was used for mapping objects between DTOs and entities, simplifying conversions and ensuring type safety without unnecessary code.
+- I used **JPA** for its powerful ORM capability, simplifying interactions with the database and keeping a clean and modular code.
 
-- For the database management, I chose PostgreSQL due to my familiarity with it and its reliability. Although I considered specialized time series databases like Prometheus, I opted for PostgreSQL for its robustness and compliance with SQL standards. The Hexagonal Architecture allows for a simple future migration to specialized solutions like Prometheus, if necessary, without requiring extensive refactoring.
+- I used **Flyway** to automate the creation of the database, as well as the insertion of initial data. This ensured that the database schema was always up to date and that the necessary data was available when starting the project.
 
-- Even though I tried to follow a TDD-based approach, the tight schedule and the amount of planned tasks made me realize that test coverage should have been more thorough, including more unit tests and integration tests to cover sad paths.
+- **Lombok** reduced the repetitive code in Java classes by generating common methods, allowing me to focus more on the business logic.
+
+- **MapStruct** was used for mapping objects between DTOs and entities, simplifying conversions and ensuring type safety without unnecessary code.
+
+- For the database management, I chose **PostgreSQL** due to my familiarity with it and its reliability. Although I considered specialized time series databases like Prometheus, I opted for PostgreSQL for its robustness and compliance with SQL standards. The Hexagonal Architecture allows for a simple future migration to specialized solutions like Prometheus, if necessary, without requiring extensive refactoring.
+
+- Even though I tried to follow a **TDD-based approach**, the tight schedule and the amount of planned tasks made me realize that test coverage should have been more thorough, including more unit tests and integration tests to cover sad paths.
 
 - I considered using virtual threads or a reactive architecture to improve the performance and scalability of the project. However, after analyzing the test requirements and the potential added complexity, I decided they were not necessary. I chose to stick with a more standard and familiar approach, prioritizing simplicity in the implementation.
 
-## FrontEnd
+### FrontEnd
 
-- I used React along with TypeScript and SWC for the frontend development. I chose this combination after personally researching on the internet, looking for a modern technological stack that is currently being used for web applications development.
+- I used **React** along with **TypeScript** and **SWC** for the frontend development. I chose this combination after personally researching on the internet, looking for a modern technological stack that is currently being used for web applications development.
 
-- For state management and API requests, I integrated TanStack Query. This library allowed me to easily handle remote data, facilitating the automatic update of the user interface with the latest server data.
+- For state management and API requests, I integrated **TanStack Query**. This library allowed me to easily handle remote data, facilitating the automatic update of the user interface with the latest server data.
 
-- I implemented Recharts for data visualization, as I found it to be the simplest option to integrate and configure to generate clear and functional charts in the user interface.
+- I implemented **Recharts** for data visualization, as I found it to be the simplest option to integrate and configure to generate clear and functional charts in the user interface.
 
-- For the quick compilation of the project, I chose Vite due to its exceptional speed and its ability to provide a smooth and efficient development experience, significantly improving the compilation time.
+- For the quick compilation of the project, I chose **Vite** due to its exceptional speed and its ability to provide a smooth and efficient development experience, significantly improving the compilation time.
 
-- Even though I couldn't dedicate time to writing automated tests, I would have liked to use tools like Jest for unit testing and Playwright for end-to-end testing, ensuring the quality of the code and the functionality of the application.
+- Even though I couldn't dedicate time to writing automated tests, I would have liked to use tools like **Vitest** for unit testing and **Playwright** for end-to-end testing, ensuring the quality of the code and the functionality of the application.
 
-- I used Tailwind CSS for styles and design, which made it easy to create a stylish user interface.
+- I used **Tailwind** CSS for styles and design, which made it easy to create a stylish user interface.
 
-- Although it was not necessary for this project, in a more professional environment I would consider using Mock Service Worker to simulate the backend behavior during development, thus avoiding blocking issues between the frontend and the real backend.
+- Although it was not necessary for this project, in a more professional environment I would consider using **Mock Service Worker** to simulate the backend behavior during development, thus avoiding blocking issues between the frontend and the real backend.
 
 
-# Challenges faced
+## Challenges faced 🤔
 
-# Things to add or improve
+## Things to add or improve 📝
 
 - Make the graphic responsive.
 
