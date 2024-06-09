@@ -42,8 +42,10 @@ Step-by-step instructions to install and configure the project locally.
 
 Before you start, make sure you have the following installed:
 
-- Docker 🐳: Necessary to lift and run the full application, including frontend and backend services in an integrated way.
-- Internet connection 🌐: To download dependencies and additional resources as needed.
+- [Docker](https://docs.docker.com/engine/install/) 🐳
+- [Npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- Java 17
+- Internet connection 🌐
 
 These requirements are essential to configure and run the project effectively.
 
@@ -58,10 +60,9 @@ To install and run the application, follow these steps:
 
 2. Start the application using Docker.
     ```bash
-    docker-compose up -d
+    chmod +x run.sh
+    ./run.sh
     ```
-
-This will place the application in the root folder `Factorial-metrics` and run all necessary services in Docker.
 
 ## How to use 🚀
 
@@ -78,7 +79,7 @@ At this web address you will find the app launched and you can start exploring a
 
 - Developed in **Java** and **Spring Boot** due to my familiarity and experience with this technology. Spring Boot simplifies the configuration and development of Java applications, with strong support for RESTful APIs, security, and data access.
 
-- I followed the **Hexagonal Architecture** (Ports and Adapters) to create a decoupled system, separating the core logic from external systems like databases. This improves maintainability and testability by isolating the business logic from infrastructure concerns.
+- I followed the **Hexagonal Architecture** to create a decoupled system, separating the core logic from external systems like databases. This improves maintainability and testability by isolating the business logic from infrastructure concerns.
 
 - I used **JPA** for its powerful ORM capability, simplifying interactions with the database and keeping a clean and modular code.
 
@@ -109,9 +110,6 @@ At this web address you will find the app launched and you can start exploring a
 - I used **Tailwind** CSS for styles and design, which made it easy to create a stylish user interface.
 
 - Although it was not necessary for this project, in a more professional environment I would consider using **Mock Service Worker** to simulate the backend behavior during development, thus avoiding blocking issues between the frontend and the real backend.
-
-
-## Challenges faced 🤔
 
 ## Things to add or improve 📝
 
