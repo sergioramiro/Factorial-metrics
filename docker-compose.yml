@@ -30,7 +30,7 @@ services:
       - app-network
 
   postgres:
-    image: postgres:latest
+    image: postgres:16.3
     container_name: postgres-db
     ports:
       - "5432:5432"
