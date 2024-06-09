@@ -8,10 +8,10 @@ sleep 10
 
 # Instalar dependencias y construir el frontend
 echo "Instalando dependencias y construyendo el frontend..."
-# cd frontend
-# npm install
-# npm run build
-# cd ..
+cd frontend
+npm install
+npm run build
+cd ..
 
 # Instalar dependencias y construir el backend
 echo "Instalando dependencias y construyendo el backend..."
