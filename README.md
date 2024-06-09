@@ -50,19 +50,50 @@ Before you start, make sure you have the following installed:
 These requirements are essential to configure and run the project effectively.
 
 ### Start the application. 🖥️
+#### Option 1: Use the existing script
 
-To install and run the application, follow these steps:
-1. Clone the repository:    
-    ```bash
-    git clone https://github.com/sergioramiro/Factorial-metrics.git
-    cd Factorial-metrics
-    ```
+>To install and run the application, follow these steps:
+>1. Clone the repository:    
+>    ```bash
+>    git clone https://github.com/sergioramiro/Factorial-metrics.git
+>    cd Factorial-metrics
+>    ```
+>
+>2. Start the application using Docker.
+>    ```bash
+>    chmod +x run.sh
+>    ./run.sh
+>    ```
+#### Option 2: Manual steps
+Alternatively, you can follow these manual steps:
 
-2. Start the application using Docker.
-    ```bash
-    chmod +x run.sh
-    ./run.sh
-    ```
+>1. Clone the repository:
+>    ```bash
+>    git clone https://github.com/sergioramiro/Factorial-metrics.git
+>    cd Factorial-metrics
+>    ```
+>2. Start PostgreSQL from the root directory using Docker Compose:
+>    ```bash
+>    docker-compose up -d postgres
+>    ```
+>3. Navigate to the backend directory and build the project using Gradle:
+>    ```bash
+>    cd backend
+>    ./gradlew build
+>    cd ..
+>    ```
+>4. Navigate to the frontend directory, install dependencies with npm, and build the frontend:
+>    ```bash
+>    cd frontend
+>    npm install
+>    npm run build
+>    cd ..
+>    ```
+>5. Finally, start the entire application using Docker Compose:
+>    ```bash
+>    docker-compose up -d
+>    ```
+
 
 ## How to use 🚀
 
