@@ -17,10 +17,6 @@ cd ..
 echo "Instalando dependencias y construyendo el backend..."
 cd backend
 ./gradlew build
-# Aquí puedes agregar cualquier comando necesario para construir tu backend,
-# como por ejemplo:
-# ./gradlew build --no-daemon   (si estás utilizando Gradle)
-# npm install                   (si estás utilizando Node.js)
 
 docker-compose up -d
 
