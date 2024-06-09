@@ -31,8 +31,8 @@ release.properties
 
 # Gradle
 .gradle/
-build/
-!gradle-wrapper.jar
+#build/
+#!gradle-wrapper.jar
 
 # Gradle Wrapper
 gradle/wrapper/gradle-wrapper.properties
