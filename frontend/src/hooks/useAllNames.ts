@@ -7,7 +7,7 @@ const getAllNames = async () => {
 
 export const useGetAllNames = () => {
   return useQuery({
-    queryKey: ["allnames"],
+    queryKey: ["allNames"],
     queryFn: getAllNames,
   });
 };
