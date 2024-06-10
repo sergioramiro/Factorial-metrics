@@ -1,15 +1,13 @@
-name: Run Tests
+name: Run Tests backend
 
 on:
   push:
     paths:
       - 'backend/**'
-      - 'frontend/**'
 
 jobs:
   backend-tests:
     runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'backend')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -23,7 +21,7 @@ jobs:
       - name: Build with Gradle
         working-directory: ./backend
         run: ./gradlew build --no-daemon
-      
+
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/factorial-metrics-backend:latest ./backend
 
@@ -32,24 +30,3 @@ jobs:
 
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/factorial-metrics-backend:latest
-
-
-  frontend-tests:
-    runs-on: ubuntu-latest
-    if: contains(github.event.head_commit.message, 'frontend')
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-
-      - name: Install dependencies
-        working-directory: ./frontend
-        run: npm install
-
-      - name: Build with npm
-        working-directory: ./frontend
-        run: npm run build
