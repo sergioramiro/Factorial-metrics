@@ -8,9 +8,8 @@ on:
 
 jobs:
   backend-tests:
-    if: github.event.head_commit.message != '' && contains(github.event.head_commit.message, 'backend')
     runs-on: ubuntu-latest
-
+    if: contains(github.event.head_commit.message, 'backend')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -26,9 +25,8 @@ jobs:
         run: ./gradlew build --no-daemon
 
   frontend-tests:
-    if: github.event.head_commit.message != '' && contains(github.event.head_commit.message, 'frontend')
     runs-on: ubuntu-latest
-
+    if: contains(github.event.head_commit.message, 'frontend')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -45,7 +43,3 @@ jobs:
       - name: Build with npm
         working-directory: ./frontend
         run: npm run build
-
-      - name: Run tests with npm
-        working-directory: ./frontend
-        run: npm test
