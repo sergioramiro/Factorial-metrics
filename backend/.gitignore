@@ -20,7 +20,6 @@
 *.iws
 *.iml
 *.ipr
-
 # Maven
 target/
 pom.xml.tag
