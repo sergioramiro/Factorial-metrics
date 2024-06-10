@@ -63,7 +63,7 @@ These requirements are essential to configure and run the project effectively.
 
 ## **How to use** 🚀
 
-Once the application is up and running, open your web browser and go to:
+Once the application is running (and wait a few seconds for everything to start 😅), open your web browser and go to:
 ```
 http://localhost:3000/
 ```
