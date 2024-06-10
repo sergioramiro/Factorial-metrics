@@ -1,6 +1,6 @@
 # Factorial-metrics
 
-1. [**Description**](#description)
+1. [**Description**](##description)
 2. [**Technologies**](#technologies)
 3. [**Installation**](#installation)
 4. [**How to use**](#How-to-use)
