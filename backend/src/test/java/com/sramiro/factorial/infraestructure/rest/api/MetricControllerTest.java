@@ -12,10 +12,11 @@ import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMap
 import com.sramiro.factorial.infraestructure.rest.api.mapper.MetricControllerMapperImpl;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 @RequiredArgsConstructor
 class MetricControllerTest {
     public static final String NAME_1 = "name1";
