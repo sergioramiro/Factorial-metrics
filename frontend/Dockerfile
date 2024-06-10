@@ -12,6 +12,8 @@ COPY . .
 
 RUN npm run build
 
+RUN ls -la
+
 FROM nginx:alpine
 
 RUN ls -la
